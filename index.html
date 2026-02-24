@@ -65,20 +65,28 @@
     </div>
   </main>
   <script>
-    const LT_URL = "https://your-lt-landing-page.com/";
+    var BASE_URL = "https://noklnk.com/x/6023069";
     (function() {
-      const params = new URLSearchParams(window.location.search);
-      const keysToPass = ["fbclid", "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
-      const forwarded = new URLSearchParams();
-      keysToPass.forEach(function(key) {
-        var val = params.get(key);
-        if (val) forwarded.append(key, val);
-      });
-      var finalURL = forwarded.toString()
-        ? LT_URL + (LT_URL.includes("?") ? "&" : "?") + forwarded.toString()
-        : LT_URL;
+      var params = new URLSearchParams(window.location.search);
+      var fbclid = params.get("fbclid") || "";
+      var utm_source = params.get("utm_source") || "";
+      var utm_medium = params.get("utm_medium") || "";
+      var utm_campaign = params.get("utm_campaign") || "";
+      var utm_content = params.get("utm_content") || "";
+      var utm_term = params.get("utm_term") || "";
+      var redirectURL = BASE_URL
+        + "?subid1=" + encodeURIComponent(fbclid)
+        + "&subid2=" + encodeURIComponent(utm_source)
+        + "&subid3=" + encodeURIComponent(utm_medium)
+        + "&subid4=" + encodeURIComponent(utm_campaign)
+        + "&subid5=" + encodeURIComponent(utm_content)
+        + "&subid6=" + encodeURIComponent(utm_term)
+        + "&subid7=&subid8=&subid9=&subid10="
+        + "&subid11=&subid12=&subid13=&subid14=&subid15=&subid16="
+        + "&creative_id=&creative_name=&source_id="
+        + "&google_aid=&ios_ifa=";
       document.querySelectorAll(".cta-button, .icon-link").forEach(function(link) {
-        link.href = finalURL;
+        link.href = redirectURL;
       });
     })();
   </script>

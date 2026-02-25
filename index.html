@@ -61,46 +61,13 @@
     .scale-in-wrapper {
       position: relative;
       animation: scaleIn 0.5s ease-out forwards;
-    }
-
-    .circle-container {
-      position: relative;
-      width: 176px;
-      height: 176px;
-    }
-
-    @media (min-width: 768px) {
-      .circle-container { width: 208px; height: 208px; }
-    }
-
-    .circle-svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .circle-bg {
-      fill: none;
-      stroke: var(--border);
-      stroke-width: 4;
-    }
-
-    .circle-progress {
-      fill: none;
-      stroke: var(--ring-red);
-      stroke-width: 4;
-      stroke-linecap: round;
-      transform: rotate(-90deg);
-      transform-origin: center center;
-      stroke-dasharray: 283;
-      stroke-dashoffset: 283;
-      animation: circleFill 1.5s ease-out 0.3s forwards;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px; /* space between icon and bar */
     }
 
     .bounce-container {
-      position: absolute;
-      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -114,6 +81,27 @@
 
     @media (min-width: 768px) {
       .home-icon { width: 96px; height: 96px; }
+    }
+
+    /* --- Flat loading bar (replaces circular loader) --- */
+    .loader-track {
+      width: 176px;
+      height: 10px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      .loader-track { width: 208px; height: 12px; }
+    }
+
+    .loader-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--ring-red);
+      border-radius: 999px;
+      animation: barFill 1.5s ease-out 0.3s forwards;
     }
 
     h1 {
@@ -188,9 +176,9 @@
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes circleFill {
-      0% { stroke-dashoffset: 283; }
-      100% { stroke-dashoffset: 0; }
+    @keyframes barFill {
+      0% { width: 0%; }
+      100% { width: 100%; }
     }
 
     @keyframes bounceSoft {
@@ -204,18 +192,16 @@
     <div class="content-wrapper">
       <a href="#" class="icon-link">
         <div class="scale-in-wrapper">
-          <div class="circle-container">
-            <svg class="circle-svg" viewBox="0 0 100 100">
-              <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
-              <circle class="circle-progress" cx="50" cy="50" r="45"></circle>
+          <div class="bounce-container">
+            <svg class="home-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 10L12 3l9 7"></path>
+              <path d="M5 10v10h14V10"></path>
+              <rect x="9" y="14" width="6" height="6"></rect>
             </svg>
-            <div class="bounce-container">
-              <svg class="home-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 10L12 3l9 7"></path>
-                <path d="M5 10v10h14V10"></path>
-                <rect x="9" y="14" width="6" height="6"></rect>
-              </svg>
-            </div>
+          </div>
+
+          <div class="loader-track" aria-label="Loading">
+            <div class="loader-fill"></div>
           </div>
         </div>
       </a>

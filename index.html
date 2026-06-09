@@ -208,7 +208,7 @@
         </div>
       </a>
 
-      <h1>Find Out Your Homes Value And Access Your Equity</h1>
+      <h1>Ready to See <br>Your Home’s Value?</h1>
 
       <div class="cta-wrapper">
         <a href="#" class="cta-button">CLICK TO BEGIN</a>
@@ -222,6 +222,7 @@
     (function() {
       var params = new URLSearchParams(window.location.search);
       var fbclid = params.get("fbclid") || "";
+      var gclid = params.get("gclid") || "";
       var utm_source = params.get("utm_source") || "";
       var utm_medium = params.get("utm_medium") || "";
       var utm_campaign = params.get("utm_campaign") || "";
@@ -237,7 +238,8 @@
         + "&subid7=&subid8=&subid9=&subid10="
         + "&subid11=&subid12=&subid13=&subid14=&subid15=&subid16="
         + "&creative_id=&creative_name=&source_id="
-        + "&google_aid=&ios_ifa=";
+        + "&google_aid=&ios_ifa="
+        + "&gclid=" + encodeURIComponent(gclid);
       document.querySelectorAll(".cta-button, .icon-link").forEach(function(link) {
         link.href = redirectURL;
       });
